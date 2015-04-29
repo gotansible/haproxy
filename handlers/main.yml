@@ -1,0 +1,4 @@
+---
+- name: restart {{ haproxy_service_name }}
+  runit: name={{ haproxy_service_name }} state=restarted
+

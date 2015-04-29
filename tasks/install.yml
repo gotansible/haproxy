@@ -1,0 +1,25 @@
+- name: install haproxy - Debian
+  apt:
+    name=haproxy
+    state=present
+    update_cache=yes
+    cache_valid_time=3600
+  when: ansible_os_family == "Debian"
+
+- name: install haproxy - CentOs
+  yum:
+    name=haproxy
+    state=present
+    update_cache=yes
+  when: ansible_os_family == "RedHat"
+
+- name: install - directories
+  file:
+    state=directory
+    path={{ item }}
+    owner={{ haproxy_user }}
+    group={{ haproxy_group }}
+  with_items:
+    - "{{ haproxy_config_dir }}"
+    - "{{ haproxy_log_dir }}"
+

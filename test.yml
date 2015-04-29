@@ -1,0 +1,10 @@
+---
+- hosts: all
+  sudo: true
+
+  vars:
+    todo: ""
+
+  roles:
+    - {role: haproxy }
+

@@ -1,0 +1,6 @@
+---
+# aggregted vars 
+haproxy_install_dir : "/opt/{{ haproxy_service_name }}"
+haproxy_config_dir : "/etc/{{  haproxy_service_name }}"
+haproxy_log_dir : "/var/log/{{ haproxy_service_name }}"
+

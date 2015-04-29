@@ -1,0 +1,22 @@
+---
+- include_vars: haproxy.yml
+
+- name: haproxy stub config
+  template:
+    src=haproxy.cfg.stub.j2
+    dest={{haproxy_config_dir}}/haproxy.cfg
+    owner=root
+    group=root
+    mode=0755
+    backup=no
+
+- name: haproxy config template
+  template:
+    src=haproxy.cfg.tmpl.j2
+    dest={{haproxy_config_dir}}/haproxy.cfg.tmpl
+    owner=root
+    group=root
+    mode=0755 
+    backup=yes
+  notify: restart {{ haproxy_service_name }}
+

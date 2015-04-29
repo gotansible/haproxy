@@ -1,0 +1,51 @@
+haproxy_config:
+  - name: 'global'
+    config:
+      - log /dev/log local0
+      - log /dev/log local1 notice
+      - chroot /var/lib/haproxy
+      - stats socket /run/haproxy/admin.sock mode 660 level admin
+      - stats timeout 30s
+      - user haproxy
+      - group haproxy
+      - daemon
+      - maxconn 2000
+      - ca-base /etc/ssl/certs
+      - crt-base /etc/ssl/private
+      - ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS
+      - ssl-default-bind-options no-sslv3
+  - name: 'defaults'
+    config:
+      - log     global
+      - mode    http
+      - option  httplog
+      - option  dontlognull
+      - timeout connect 5000
+      - timeout client  50000
+      - timeout server  50000
+      - errorfile 400 /etc/haproxy/errors/400.http
+      - errorfile 403 /etc/haproxy/errors/403.http
+      - errorfile 408 /etc/haproxy/errors/408.http
+      - errorfile 500 /etc/haproxy/errors/500.http
+      - errorfile 502 /etc/haproxy/errors/502.http
+      - errorfile 503 /etc/haproxy/errors/503.http
+      - errorfile 504 /etc/haproxy/errors/504.http
+
+  
+haproxy_config_enable_stats: true
+haproxy_config_stats_password: 'changeMe'
+haproxy_config_stats_url: '/haproxy?stats'
+haproxy_config_stats_user: 'admin'
+haproxy_config_check_interval: '10s'
+haproxy_config_client_timeout: '60s'
+haproxy_config_server_timeout: '60s'
+haproxy_config_queue_timeout: '120s'
+haproxy_config_connect_timeout: '10s'
+haproxy_config_http_request_timeout: '30s'
+haproxy_config_global_max_connections: '80000'
+haproxy_config_default_max_connections: '80000'
+haproxy_config_retries: '3'
+haproxy_config_stats_socket_path: '/tmp/haproxy.sock'
+haproxy_config_stats_socket_level: nil # nil for default or 'user', 'operator', 'admin'
+haproxy_config_balance: 'roundrobin'
+
