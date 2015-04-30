@@ -18,5 +18,5 @@
     group=root
     mode=0755 
     backup=yes
-  notify: restart {{ haproxy_service_name }}
+  notify: restart haproxy
 

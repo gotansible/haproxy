@@ -16,14 +16,12 @@
 
 - name: delete service included with package
   file: path=/etc/init.d/haproxy state=absent
-  when: False
 
 - name: service
   include: runit_service.yml
   vars:
     service_name: "{{ haproxy_service_name }}"
     service_user: "{{haproxy_user}}"
-    service_group: "{{haproxy_group}}"
     service_command: /usr/sbin/haproxy -db -f {{ haproxy_config_dir }}/haproxy.cfg
     service_env_vars: {}
 
