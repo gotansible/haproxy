@@ -1,6 +1,8 @@
 #!/bin/sh
 
+#HAProxy requires root access to listen on lower level ports like port 80, 443
+
 exec 2>&1
-exec chpst -e /etc/sv/{{ service_name }}/env -u {{ service_user }} {{ service_command }}
+exec chpst -e /etc/sv/{{ service_name }}/env -u root {{ service_command }}
 
 

@@ -48,25 +48,25 @@ listen application 0.0.0.0:80
 #---------------------------------------------------------------------
 # main frontend which proxys to the backends
 #---------------------------------------------------------------------
-frontend main_http *:80
-        option forwardfor except 127.0.0.1
-        default_backend         nginx_80
-
-frontend main_https *:443
-        option forwardfor except 127.0.0.1
-        default_backend         nginx_443
+#frontend main_http *:80
+#        option forwardfor except 127.0.0.1
+#        default_backend         nginx_80
+#
+#frontend main_https *:443
+#        option forwardfor except 127.0.0.1
+#        default_backend         nginx_443
 
 #---------------------------------------------------------------------
 # round robin balancing between the various backends
 #---------------------------------------------------------------------
-backend nginx_80
-    balance     roundrobin
-        #option httpchk GET /health HTTP/1.1\r\nHost:\ health.example.com
-		option httpchk
- 
-backend nginx_443
-    balance     roundrobin
-#       option httpchk GET / HTTP/1.1\r\nHost:\ host.com
-        option httpchk
+#backend nginx_80
+#    balance     roundrobin
+#        #option httpchk GET /health HTTP/1.1\r\nHost:\ health.example.com
+#		option httpchk
+# 
+#backend nginx_443
+#    balance     roundrobin
+##       option httpchk GET / HTTP/1.1\r\nHost:\ host.com
+#        option httpchk
 
 

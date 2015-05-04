@@ -5,6 +5,7 @@ haproxy_binary: haproxy
 haproxy_user:  "{{ haproxy_service_name }}"
 haproxy_group: "{{ haproxy_service_name }}"
 
+
 haproxy_consul_template_service:
   - name: haproxy
     source: "{{haproxy_config_dir}}/haproxy.cfg.tmpl"

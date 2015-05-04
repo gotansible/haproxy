@@ -48,4 +48,5 @@ haproxy_config_retries: '3'
 haproxy_config_stats_socket_path: '/tmp/haproxy.sock'
 haproxy_config_stats_socket_level: nil # nil for default or 'user', 'operator', 'admin'
 haproxy_config_balance: 'roundrobin'
+haproxy_config_stats_socket_level: operator
 
