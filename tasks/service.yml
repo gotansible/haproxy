@@ -1,0 +1,13 @@
+---
+
+- name: service - setup and run
+  runit:
+    name: "{{ haproxy_service_name }}"
+    enabled: yes
+    state: up
+    timeout: 10
+    user: "{{ haproxy_user }}"
+    command:  /usr/sbin/haproxy -db -f {{ haproxy_config_dir }}/haproxy.cfg
+    env_vars: {}
+  register: haproxy_service_status
+

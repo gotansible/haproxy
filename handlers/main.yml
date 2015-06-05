@@ -1,4 +1,6 @@
 ---
+
 - name: restart haproxy
-  runit: name={{ haproxy_service_name }} state=restarted
+  runit: name={{ haproxy_service_name }} state=up timeout=9 action=restart
+  when: not haproxy_service_status.restarted
 
