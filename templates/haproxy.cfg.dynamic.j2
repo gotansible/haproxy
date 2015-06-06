@@ -1,0 +1,8 @@
+#{{ ansible_managed }}
+
+{% for v in haproxy_config %}
+{{v.name}}
+    {% for c in v.config %}
+    {{c}}
+    {% endfor %}
+{% endfor %}

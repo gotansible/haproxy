@@ -12,8 +12,18 @@
 
 - name: haproxy config template
   template:
-    src=haproxy.cfg.tmpl.j2
+    src=haproxy.cfg.dynamic.j2
     dest={{haproxy_config_dir}}/haproxy.cfg.tmpl
+    owner=root
+    group=root
+    mode=0755 
+    backup=yes
+  notify: restart haproxy
+
+- name: haproxy config template
+  template:
+    src=haproxy.cfg.tmpl.j2
+    dest={{haproxy_config_dir}}/haproxy_2.cfg.tmpl
     owner=root
     group=root
     mode=0755 
