@@ -10,8 +10,9 @@ haproxy_config_dir : "/etc/{{  haproxy_service_name }}"
 haproxy_log_dir : "/var/log/{{ haproxy_service_name }}"
 
 
-haproxy_consul_template_service:
+haproxy_consul_template:
   - name: haproxy
     source: "{{haproxy_config_dir}}/haproxy.cfg.tmpl"
     destination: "{{haproxy_config_dir}}/haproxy.cfg"
-    command: 'sv restart haproxy'
+    command: 'sudo sv restart haproxy'
+
