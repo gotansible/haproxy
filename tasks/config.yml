@@ -18,7 +18,7 @@
     owner=root
     group=root
     mode=0755 
-    backup=yes
+    backup=no
   notify: restart haproxy
   when: haproxy_use_consul
 
