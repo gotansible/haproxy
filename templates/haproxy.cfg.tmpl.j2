@@ -70,19 +70,19 @@ frontend main_https *:443
 backend nginx_80
 	balance     roundrobin
 	option httpchk GET /health HTTP/1.1\r\nHost:\ health
-	{{range service "nginx@taku"}}
+	{{range service "nginx_http@taku"}}
 	server {{.Name}} {{.Address}}:{{.Port}}{{end}}
 
 backend nginx_443
 	balance     roundrobin
 	option httpchk
-	{{range service "nginx@taku"}}
+	{{range service "nginx_https@taku"}}
 	server {{.Name}} {{.Address}}:{{.Port}}{{end}}
 
 backend upload_80
 	balance source #source IP
 	option httpchk GET /nginx_status HTTP/1.1\r\nHost:\ health
-	{{range service "nginx@taku"}}
+	{{range service "nginx_upload@taku"}}
 	server {{.Name}} {{.Address}}:{{.Port}}{{end}}
  
 {% endraw %}
