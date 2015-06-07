@@ -9,16 +9,7 @@
     group=root
     mode=0755
     backup=no
-
-    #- name: haproxy config template
-    #  template:
-    #    src=haproxy.cfg.dynamic.j2
-    #    dest={{haproxy_config_dir}}/haproxy_dynamic.cfg.tmpl
-    #    owner=root
-    #    group=root
-    #    mode=0755 
-    #    backup=yes
-    #  notify: restart haproxy
+  when: not haproxy_use_consul
 
 - name: haproxy config template
   template:
@@ -29,4 +20,5 @@
     mode=0755 
     backup=yes
   notify: restart haproxy
+  when: haproxy_use_consul
 
