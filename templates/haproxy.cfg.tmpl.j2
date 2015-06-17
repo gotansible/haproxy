@@ -82,7 +82,7 @@ backend nginx_443
 backend upload_80
 	balance source #source IP
 	option httpchk GET /nginx_status HTTP/1.1\r\nHost:\ health
-	{{range service "nginx_upload@taku"}}
+	{{range service "nginx_http@taku"}}
 	server {{.Name}} {{.Address}}:{{.Port}}{{end}}
  
 {% endraw %}
