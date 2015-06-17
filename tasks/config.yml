@@ -19,6 +19,9 @@
     group=root
     mode=0755 
     backup=no
-  notify: restart haproxy
+  notify: 
+    - restart haproxy
+    - restart consul
+    - restart consul-template
   when: haproxy_use_consul
 
