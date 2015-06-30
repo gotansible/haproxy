@@ -1,6 +1,4 @@
 ---
-- include_vars: haproxy.yml
-
 - name: haproxy stub config
   template:
     src=haproxy.cfg.stub.j2
