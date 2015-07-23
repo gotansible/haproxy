@@ -20,7 +20,7 @@ defaults
   mode            http
   option          httplog
   option          dontlognull
-  option          forwardfor except 127.0.0.0/8
+  option          forwardfor header X-Real-IP
   option          redispatch
   retries                 {{ haproxy_config_retries }}
   maxconn                 {{ haproxy_config_default_max_connections }}
@@ -50,8 +50,10 @@ defaults
 # main frontend which proxys to the backends
 #---------------------------------------------------------------------
 frontend main_http *:80
-	option forwardfor except 127.0.0.1
-	default_backend         nginx_80
+	default_backend		nginx_80
+	reqidel				^X-Real-IP:.*
+	reqidel 			^X-Forwarded-For:.*
+	reqidel 			^Forwarded:.*
 
 	acl host_upload hdr_beg(host) -i upload.
 	acl host_upload path_sub -i upload
@@ -59,8 +61,10 @@ frontend main_http *:80
 	use_backend upload_80 if host_upload
 
 frontend main_https *:443
-	option forwardfor except 127.0.0.1
 	default_backend         nginx_443
+	reqidel				^X-Real-IP:.*
+	reqidel 			^X-Forwarded-For:.*
+	reqidel 			^Forwarded:.*
 
 #---------------------------------------------------------------------
 # round robin balancing between the various backends
