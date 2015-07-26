@@ -1,7 +1,12 @@
+
+- name: install ppa - debian
+  apt_repository:
+    repo="ppa:vbernat/haproxy-1.5"
+
 - name: install haproxy - Debian
   apt:
     name=haproxy
-    state=present
+    state=latest
     update_cache=yes
     cache_valid_time=3600
   when: ansible_os_family == "Debian"

@@ -1,0 +1,38 @@
+---
+
+- name: apt depend
+  apt:
+    name={{ item }}
+    state=present
+    cache_valid_time=3600
+    update_cache=yes
+  with_items:
+    - build-essential
+    - libpcre3-dev
+    - make
+    - g++
+    - libssl-dev
+    - zlib1g-dev
+
+- name: create build dir
+  file:
+    path={{ haproxy_build_dir }}
+    state=directory
+
+- name: unarchive
+  unarchive:
+    src={{ haproxy_archive }}
+    dest={{ haproxy_build_dir }}
+    copy=yes
+
+- name: make with options
+  command: "{{ item }}"
+  args:
+    chdir: "{{ haproxy_build_dir }}/{{ haproxy_archive | replace('.tar.gz', '') }}"
+  with_items:
+    - "make {{ haproxy_make_args }}"
+    - make install
+
+
+
+
