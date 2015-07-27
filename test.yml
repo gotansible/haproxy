@@ -2,9 +2,10 @@
 - hosts: all
   sudo: true
 
-  vars:
-    todo: ""
-
   roles:
-    - {role: haproxy }
+    - role: haproxy
+      haproxy_configs:
+        - haproxy.cfg
+        - sftp.cfg
+
 

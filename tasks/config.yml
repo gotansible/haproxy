@@ -1,4 +1,19 @@
 ---
+
+- name: haproxy configs
+  template:
+    src={{ item }}.j2
+    dest={{haproxy_config_dir}}/{{ item }}
+    owner=root
+    group=root
+    mode=0755
+    backup=no
+  with_items:
+    - sftp.map
+    - sftp.cfg
+  notify:
+    - restart haproxy
+
 - name: haproxy stub config
   template:
     src=haproxy.cfg.stub.j2
@@ -8,6 +23,8 @@
     mode=0755
     backup=no
   when: not haproxy_use_consul
+  notify:
+    - restart haproxy
 
 - name: haproxy config template
   template:

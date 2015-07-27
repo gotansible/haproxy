@@ -7,7 +7,7 @@
     state: start
     timeout: 10
     user: "{{ haproxy_user }}"
-    command: "/usr/sbin/haproxy -db -f {{ haproxy_config_dir }}/haproxy.cfg"
+    command: "/usr/sbin/haproxy -db {% for file_name in haproxy_configs %}-f {{ haproxy_config_dir }}/{{ file_name }} {% endfor %}"
     env_vars: {}
   register: haproxy_service_status
 

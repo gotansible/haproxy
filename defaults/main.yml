@@ -9,12 +9,21 @@ haproxy_install_dir: "/opt/{{ haproxy_service_name }}"
 haproxy_config_dir: "/etc/{{  haproxy_service_name }}"
 haproxy_log_dir: "/var/log/{{ haproxy_service_name }}"
 
+haproxy_configs:
+  - haproxy.cfg
+
 haproxy_build_dir: /var/ansible/cache/haproxy
 haproxy_archive: haproxy-1.5.14.tar.gz
 
 haproxy_make_args: TARGET=custom CPU=native USE_PCRE=1 USE_LINUX_SPLICE=1 USE_LIBCRYPT=1 USE_OPENSSL=1 USE_ZLIB=1
 
 haproxy_use_consul: False
+
+haproxy_sftp_port: 2222
+haproxy_sftp_map:
+  - domain: sftp.example.com
+    ip: 10.0.0.0
+    port: 22
 
 haproxy_consul_template:
   - name: haproxy

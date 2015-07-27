@@ -1,0 +1,25 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+#http://blog.haproxy.com/2015/01/26/web-application-name-to-backend-mapping-in-haproxy/
+
+# timeout connect <timeout>  Set the maximum time to wait for a connection attempt to a server to succeed.
+# timeout server <timeout> The inactivity timeout applies when the server is expected to acknowledge or
+  send data.
+# timeout client <timeout>  The inactivity timeout applies when the client is expected to acknowledge or
+  send data
+
+frontend sftp *:{{ haproxy_sftp_port }}
+	mode tcp
+	timeout client 120s
+	timeout client-fin 30s
+	timeout connect 50s
+	use_backend %[req.hdr(host),lower,map(/etc/haproxy/sftp.map)]
+
+{%  for item in haproxy_sftp_map %}
+backend bk_sftp_{{ item.domain | regex_replace('\.', '_') }}
+	mode tcp
+	server {{ item.domain | regex_replace('\.', '_') }} {{ item.ip }}:{{ item.port }} check port {{ item.port }}
+	timeout connect 50s
+	timeout server 50s
+	timeout tunnel 120s
+
+{% endfor %}

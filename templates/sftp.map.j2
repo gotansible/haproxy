@@ -1,0 +1,7 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+# domain              backend
+# sftp.example.com    bk_sftp_example_com
+
+{% for item in haproxy_sftp_map %}
+{{ item.domain }} bk_sftp_{{ item.domain | regex_replace('\.', '_') }}
+{% endfor %}
