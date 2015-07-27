@@ -7,5 +7,10 @@
       haproxy_configs:
         - haproxy.cfg
         - sftp.cfg
+      haproxy_sftp_map:
+        - domain: sftp.example.com
+          ip: 10.0.0.0
+          port: 22
+
 
 

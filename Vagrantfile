@@ -14,4 +14,13 @@ Vagrant.configure(2) do |config|
 		end
 		haproxy.vm.network "private_network", ip: "192.168.50.20"
 	end
+#	config.vm.define "backend" do |haproxy|
+#		haproxy.vm.hostname = "backend"
+#		haproxy.vm.box = "hashicorp/precise64"
+#	#	haproxy.vm.provision :ansible do |ansible|
+#	#		ansible.playbook = "test.yml"
+#	#	end
+#		haproxy.vm.network "private_network", ip: "192.168.50.30"
+#	end
+
 end
