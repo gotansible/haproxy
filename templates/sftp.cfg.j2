@@ -2,10 +2,8 @@
 #http://blog.haproxy.com/2015/01/26/web-application-name-to-backend-mapping-in-haproxy/
 
 # timeout connect <timeout>  Set the maximum time to wait for a connection attempt to a server to succeed.
-# timeout server <timeout> The inactivity timeout applies when the server is expected to acknowledge or
-  send data.
-# timeout client <timeout>  The inactivity timeout applies when the client is expected to acknowledge or
-  send data
+# timeout server <timeout> The inactivity timeout applies when the server is expected to acknowledge or send data.
+# timeout client <timeout>  The inactivity timeout applies when the client is expected to acknowledge or send data
 
 frontend sftp *:{{ haproxy_sftp_port }}
 	mode tcp
